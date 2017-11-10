@@ -6,11 +6,15 @@ from xml.etree import ElementTree
 
 import pkgutil
 import io
+import os
 import pandas
 
-RESOURCE_PACKAGE: str = __name__
-RESOURCE_PATH: str = '/'.join(('templates', 'tasks.csv'))
-TEMPLATE: io.BytesIO = io.BytesIO(pkgutil.get_data(RESOURCE_PACKAGE, RESOURCE_PATH))
+RESOURCE_PATH: str
+RESOURCE_PACKAGE: str
+RESOURCE_PATH, _ = os.path.split(__file__)
+# RESOURCE_PACKAGE = os.path.join(RESOURCE_PATH, 'templates', 'tasks.csv')
+TEMPLATE = os.path.join(RESOURCE_PATH, 'templates', 'tasks.csv')
+# TEMPLATE: io.BytesIO = io.BytesIO(pkgutil.get_data(RESOURCE_PACKAGE, RESOURCE_PATH))
 """
 Default Todoist task template.
 """
