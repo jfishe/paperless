@@ -18,6 +18,7 @@ requirements:
   build:
     - python
     - setuptools
+    - pytest-runner
 
   run:
     - python
@@ -40,7 +41,7 @@ about:
   summary: data['description']
   description: data['long_description']
   doc_url: ''
-  dev_url: data['url']
+  dev_url: ''
 
 extra:
   recipe-maintainers: ''
