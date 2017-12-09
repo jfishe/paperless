@@ -1,0 +1,46 @@
+{% set data = load_setup_py_data() %}
+
+package:
+  name: paperless
+  version: {{ data['version'] }}
+
+source:
+  path: ..
+
+build:
+  number: 0
+  entry_points:
+    - paperless = paperless.cli:main
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+    - click
+    - pandas
+
+test:
+  imports:
+    - paperless
+
+  commands:
+    - paperless --help
+
+about:
+  home: data['url']
+  license: GNU GENERAL PUBLIC LICENSE
+  license_file: LICENSE.md
+  license_family: GPL3
+
+  summary: data['description']
+  description: data['long_description']
+  doc_url: ''
+  dev_url: data['url']
+
+extra:
+  recipe-maintainers: ''

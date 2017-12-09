@@ -1,33 +1,29 @@
 # -*- coding: utf-8 -*-
 
 """Main module."""
-from typing import Union
+from typing import Any, Dict, List
 from xml.etree import ElementTree
 
-import pkgutil
-import io
 import os
-import pandas
+import pandas # type: ignore
 
 RESOURCE_PATH: str
 RESOURCE_PACKAGE: str
 RESOURCE_PATH, _ = os.path.split(__file__)
-# RESOURCE_PACKAGE = os.path.join(RESOURCE_PATH, 'templates', 'tasks.csv')
 TEMPLATE = os.path.join(RESOURCE_PATH, 'templates', 'tasks.csv')
-# TEMPLATE: io.BytesIO = io.BytesIO(pkgutil.get_data(RESOURCE_PACKAGE, RESOURCE_PATH))
 """
 Default Todoist task template.
 """
 
-def read_csv(template: Union[str, io.BytesIO] = TEMPLATE, **kwargs
+def read_csv(template: str = TEMPLATE, **kwargs
             ) -> pandas.Index:
     """read_csv
 
-    Longer description is....
+    Read the ToDoist template to get column headings.
 
     Parameters
     ----------
-    template : Union[str, io.BytesIO]
+    template : str
         `template` is a csv file containing the headers expected by Todoist.
     **kwargs :
         See `pandas.read_csv` for key word arguments.
@@ -56,7 +52,7 @@ def xml2df(xml_data: str) -> pandas.DataFrame:
     """
     root = ElementTree.XML(xml_data) # element tree
     all_records = []
-    for i, child in enumerate(root):
+    for child in root:
         record = {}
         for subchild in child:
             record[subchild.tag] = subchild.text
@@ -92,9 +88,7 @@ def read_paperless(file: str, drop_duplicates: bool = True
 
 def convert(new_tasks: pandas.DataFrame, columns: pandas.Index = read_csv()
            ) -> pandas.DataFrame:
-    """convert
-
-    Longer description is....
+    """Convert the Paperless XML data to Todoist format.
 
     Parameters
     ----------
@@ -105,10 +99,11 @@ def convert(new_tasks: pandas.DataFrame, columns: pandas.Index = read_csv()
 
     Returns
     -------
-    None
+    pandas.DataFrame
+        Return a DataFrame using the columns from the Todoist template.
 
     """
-    column_map = {'TYPE': list(), 'CONTENT': list()}
+    column_map: Dict[str, List[Any]] = {'TYPE': list(), 'CONTENT': list()}
     for item in new_tasks.itertuples():
         column_map['TYPE'] += ['task']
         column_map['CONTENT'] += [item.itemName]

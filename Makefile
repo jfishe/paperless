@@ -41,6 +41,7 @@ clean-pyc: ## remove Python file artifacts
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
+	find . -name '.mypy_cache' -exec rm -fr {} +
 
 clean-test: ## remove test and coverage artifacts
 	rm -fr .tox/
@@ -48,11 +49,12 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 
 lint: ## check style with flake8
-	flake8 paperless tests
+	pylint paperless
+	mypy paperless
 
 test: ## run tests quickly with the default Python
 	py.test
-	
+
 
 test-all: ## run tests on every Python version with tox
 	tox

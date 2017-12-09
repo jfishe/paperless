@@ -3,9 +3,9 @@
 
 """Tests for `paperless` package."""
 
-import pytest
+import pytest # type: ignore
 
-from click.testing import CliRunner
+from click.testing import CliRunner # type: ignore
 
 from paperless import paperless
 from paperless import cli
@@ -31,8 +31,18 @@ def test_command_line_interface():
     """Test the CLI."""
     runner = CliRunner()
     result = runner.invoke(cli.main)
-    assert result.exit_code == 0
-    assert 'paperless.cli.main' in result.output
+    assert result.exit_code == 2
+    response = 'Usage: main [OPTIONS] XML_INPUT'
+    assert response in result.output
     help_result = runner.invoke(cli.main, ['--help'])
+    response = """Usage: main [OPTIONS] XML_INPUT
+
+  Console script for paperless.
+
+Options:
+  --output TEXT           Todoist CSV task file
+  --template TEXT         Todoist exported template
+  --drop_duplicates TEXT  Remove duplicate Paperless tasks
+  --help                  Show this message and exit."""
     assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
+    assert response in help_result.output

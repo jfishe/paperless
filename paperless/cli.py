@@ -8,13 +8,15 @@ from paperless import convert, read_paperless, read_csv, write_csv
 
 
 @click.command()
-@click.option('--output', default=None, help='Todoist CSV task file')
-@click.option('--template', default=None, help='Todoist exported template')
+@click.option('--output', default=None,
+              help='Todoist CSV task file (default to XML_INPUT.csv')
+@click.option('--template', default=None,
+              help='Todoist exported template (default template provided')
 @click.option('--drop_duplicates', default=True,
               help='Remove duplicate Paperless tasks')
 @click.argument('xml_input')
-def main(xml_input: str, output: str, template: str,
-         drop_duplicates: bool) -> None:
+def main(xml_input: str = None, output: str = None, template: str = None,
+         drop_duplicates: bool = True) -> None:
     """Console script for paperless."""
 
     df = read_paperless(xml_input, drop_duplicates=drop_duplicates)
