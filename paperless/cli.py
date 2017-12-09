@@ -13,7 +13,7 @@ from paperless import convert, read_paperless, read_csv, write_csv
 @click.option('--template', default=None,
               help='Todoist exported template (default template provided')
 @click.option('--drop_duplicates', default=True,
-              help='Remove duplicate Paperless tasks')
+              help='Remove duplicate Paperless tasks [True (default), False]')
 @click.argument('xml_input')
 def main(xml_input: str = None, output: str = None, template: str = None,
          drop_duplicates: bool = True) -> None:
