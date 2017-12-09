@@ -3,32 +3,15 @@ paperless
 =========
 
 
-.. image:: https://img.shields.io/pypi/v/paperless.svg
-        :target: https://pypi.python.org/pypi/paperless
 
-.. image:: https://img.shields.io/travis/jfishe/paperless.svg
-        :target: https://travis-ci.org/jfishe/paperless
+Convert Paperless_ XML format to CSV for import to Todoist_
 
-.. image:: https://readthedocs.org/projects/paperless/badge/?version=latest
-        :target: https://paperless.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
-
-.. image:: https://pyup.io/repos/github/jfishe/paperless/shield.svg
-     :target: https://pyup.io/repos/github/jfishe/paperless/
-     :alt: Updates
-
-
-Convert Paperless XML format to CSV for import to Todoist
-
+.. _Todoist: https://support.todoist.com/hc/en-us/articles/208821185
+.. _Paperless: http://crushapps.com/paperless/
 
 * Free software: GNU General Public License v3
 * Documentation: https://paperless.readthedocs.io.
 
-
-Features
---------
-
-* TODO
 
 Credits
 ---------
