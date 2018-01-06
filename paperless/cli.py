@@ -8,16 +8,25 @@ from paperless import convert, read_paperless, read_csv, write_csv
 
 
 @click.command()
-@click.option('--output', default=None,
+@click.option('--output', type=click.Path(), default=None,
               help='Todoist CSV task file (default to XML_INPUT.csv')
-@click.option('--template', default=None,
+@click.option('--template', type=click.Path(), default=None,
               help='Todoist exported template (default template provided')
-@click.option('--drop_duplicates', default=True,
+@click.option('--drop-duplicates', type=bool, default=True,
               help='Remove duplicate Paperless tasks [True (default), False]')
-@click.argument('xml_input')
+@click.argument('xml-input', type=click.Path())
 def main(xml_input: str = None, output: str = None, template: str = None,
          drop_duplicates: bool = True) -> None:
-    """Console script for paperless."""
+    """Console script for paperless.
+
+    Convert Paperless XML format to CSV for import to Todoist
+
+    Todoist: https://support.todoist.com/hc/en-us/articles/208821185
+
+    Paperless: http://crushapps.com/paperless/
+
+    Free software: GNU General Public License v3
+    """
 
     df = read_paperless(xml_input, drop_duplicates=drop_duplicates)
 
