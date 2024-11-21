@@ -39,10 +39,22 @@ def test_command_line_interface():
 
   Console script for paperless.
 
+  Convert Paperless_ XML format file (XML_INPUT) to CSV for import to Todoist_.
+  The .xml extension is required.
+
+  .. _Todoist: https://support.todoist.com/hc/en-us/articles/208821185
+
+  .. _Paperless: http://crushapps.com/paperless/
+
+  Free software: GNU General Public License v3
+
 Options:
-  --output TEXT           Todoist CSV task file
-  --template TEXT         Todoist exported template
-  --drop_duplicates TEXT  Remove duplicate Paperless tasks
-  --help                  Show this message and exit."""
+  --output PATH              Todoist CSV task file (default: XML_INPUT.csv)
+  --template PATH            Todoist exported template (default template
+                             provided)
+  --drop-duplicates BOOLEAN  Remove duplicate Paperless tasks [True (default),
+                             False]
+  --help                     Show this message and exit.
+"""
     assert help_result.exit_code == 0
     assert response in help_result.output
